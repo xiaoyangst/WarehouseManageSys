@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWidget</class>
+ <widget class="QWidget" name="MainWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>893</width>
+    <height>487</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWidget</string>
+  </property>
+  <widget class="QTableWidget" name="tableWidget">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>120</y>
+     <width>851</width>
+     <height>351</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="addGoodsBtn">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>70</y>
+     <width>75</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>新增商品</string>
+   </property>
+   <property name="icon">
+    <iconset resource="../sources/resource.qrc">
+     <normaloff>:/icons/add.ico</normaloff>:/icons/add.ico</iconset>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="removeGoodsBtn">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>70</y>
+     <width>75</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>删除商品</string>
+   </property>
+   <property name="icon">
+    <iconset resource="../sources/resource.qrc">
+     <normaloff>:/icons/delete.ico</normaloff>:/icons/delete.ico</iconset>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="wareHouseBtn">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>70</y>
+     <width>75</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>商品入库</string>
+   </property>
+   <property name="icon">
+    <iconset resource="../sources/resource.qrc">
+     <normaloff>:/icons/upload.ico</normaloff>:/icons/upload.ico</iconset>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="deliveryBtn">
+   <property name="geometry">
+    <rect>
+     <x>350</x>
+     <y>70</y>
+     <width>75</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>商品出库</string>
+   </property>
+   <property name="icon">
+    <iconset resource="../sources/resource.qrc">
+     <normaloff>:/icons/download.ico</normaloff>:/icons/download.ico</iconset>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="exportDataBtn">
+   <property name="geometry">
+    <rect>
+     <x>450</x>
+     <y>70</y>
+     <width>75</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>导出数据</string>
+   </property>
+   <property name="icon">
+    <iconset resource="../sources/resource.qrc">
+     <normaloff>:/icons/export.ico</normaloff>:/icons/export.ico</iconset>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="summeryDataBtn">
+   <property name="geometry">
+    <rect>
+     <x>550</x>
+     <y>70</y>
+     <width>75</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>数据汇总</string>
+   </property>
+   <property name="icon">
+    <iconset resource="../sources/resource.qrc">
+     <normaloff>:/icons/summary.ico</normaloff>:/icons/summary.ico</iconset>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="findDataBtn">
+   <property name="geometry">
+    <rect>
+     <x>780</x>
+     <y>20</y>
+     <width>75</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>数据查询</string>
+   </property>
+   <property name="icon">
+    <iconset resource="../sources/resource.qrc">
+     <normaloff>:/icons/search.ico</normaloff>:/icons/search.ico</iconset>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>560</x>
+     <y>20</y>
+     <width>71</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>根据商品编号</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit">
+   <property name="geometry">
+    <rect>
+     <x>650</x>
+     <y>20</y>
+     <width>113</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+ </widget>
+ <resources>
+  <include location="../sources/resource.qrc"/>
+ </resources>
+ <connections/>
+</ui>
