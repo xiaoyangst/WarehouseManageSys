@@ -3,11 +3,18 @@
 #include "SqlConnect.h"
 #include "addgoods.h"
 #include "ui_addgoods.h"
+#include "uploadwarehouse.h"
+#include "ui_uploadwarehouse.h"
+#include "exportwarehouse.h"
+#include "ui_exportwarehouse.h"
+
+
 
 MainWidget::MainWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::MainWidget),
-    m_db(new SqlConnect(this)) {
+    m_db(new SqlConnect(this)),
+    m_id("NULL"){
 
   ui->setupUi(this);
 
@@ -44,12 +51,16 @@ void MainWidget::initConnectFunc() {
   connect(ui->exportDataBtn,&QPushButton::clicked, this,&MainWidget::exportData);
   connect(ui->summeryDataBtn,&QPushButton::clicked, this,&MainWidget::summaryData);
   connect(ui->searchDataBtn,&QPushButton::clicked, this,&MainWidget::searchData);
+  connect(ui->tableWidget,&QTableWidget::cellDoubleClicked, this,&MainWidget::updateId);
 }
 
 void MainWidget::initTableWidget() {
   // 设置 9 列 100 行
   ui->tableWidget->setColumnCount(9);
   ui->tableWidget->setRowCount(100);
+
+  // 设置表不可被编辑
+  ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
   // 表头设置文本
   ui->tableWidget->setHorizontalHeaderLabels(
@@ -71,21 +82,34 @@ void MainWidget::initTableWidget() {
   ui->tableWidget->setColumnWidth(6, 200);
   ui->tableWidget->setColumnWidth(7, 200);
   ui->tableWidget->setColumnWidth(8, 180);
+
+  // 显示数据库中所有的数据到表格中
+  showAllDataToTable();
 }
 
 void MainWidget::addGoods() {
   auto *add_goods = new AddGoods();
   add_goods->show();
-
 }
 void MainWidget::removeGoods() {
 
 }
 void MainWidget::uploadWareHouse() {
-
+  // 拿到id，传递给 UploadWareHouse对象
+  if (m_id.compare("NULL")){
+    auto *upload_ware_house = new UploadWareHouse(m_id);
+    upload_ware_house->show();
+  }else{
+    QMessageBox::information(this, "提示", "没有选中任何商品，请选择之后再使用入库功能");
+  }
 }
 void MainWidget::downloadWareHouse() {
-
+  if (m_id.compare("NULL")){
+    auto *export_ware_house = new ExportWareHouse(m_id);
+    export_ware_house->show();
+  }else{
+    QMessageBox::information(this, "提示", "没有选中任何商品，请选择之后再使用出库功能");
+  }
 }
 void MainWidget::exportData() {
 
@@ -93,6 +117,7 @@ void MainWidget::exportData() {
 void MainWidget::summaryData() {
 
 }
+
 void MainWidget::searchData() {
   ui->tableWidget->clearContents();   // 只清除表中数据，不清除表头内容
 
@@ -128,4 +153,38 @@ void MainWidget::searchData() {
     row_++;
   }
 
+}
+void MainWidget::updateId(int row, int column) {
+  // 通过行和列来绝对确定商品的编号，而非除编号以外的其它数据
+  m_id = ui->tableWidget->item(row,0)->data(0).toString();
+}
+void MainWidget::showAllDataToTable() {
+  QSqlQuery sql_query;
+  QString query_ = QString("select * from goodsinfo");
+  sql_query.exec(query_);
+
+  int row_ = 0;
+  while (sql_query.next()){
+    QString goods_id = sql_query.value(0).toString();
+    QString goods_name = sql_query.value(1).toString();
+    QString goods_amount = sql_query.value(2).toString();
+    QString goods_price = sql_query.value(3).toString();
+    QString supplier = sql_query.value(4).toString();
+    QString director = sql_query.value(5).toString();
+    QString warehousetime = sql_query.value(6).toString();
+    QString deliverytime = sql_query.value(7).toString();
+    QString remark = sql_query.value(8).toString();
+
+    ui->tableWidget->setItem(row_,0,new QTableWidgetItem(goods_id));
+    ui->tableWidget->setItem(row_,1,new QTableWidgetItem(goods_name));
+    ui->tableWidget->setItem(row_,2,new QTableWidgetItem(goods_amount));
+    ui->tableWidget->setItem(row_,3,new QTableWidgetItem(goods_price));
+    ui->tableWidget->setItem(row_,4,new QTableWidgetItem(supplier));
+    ui->tableWidget->setItem(row_,5,new QTableWidgetItem(director));
+    ui->tableWidget->setItem(row_,6,new QTableWidgetItem(warehousetime));
+    ui->tableWidget->setItem(row_,7,new QTableWidgetItem(deliverytime));
+    ui->tableWidget->setItem(row_,8,new QTableWidgetItem(remark));
+
+    row_++;
+  }
 }

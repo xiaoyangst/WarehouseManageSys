@@ -7,5 +7,7 @@
         <file>icons/search.ico</file>
         <file>icons/summary.ico</file>
         <file>icons/upload.ico</file>
+        <file>icons/storage.ico</file>
+        <file>icons/exit.ico</file>
     </qresource>
 </RCC>

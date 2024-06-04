@@ -6,12 +6,16 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>893</width>
-    <height>518</height>
+    <width>896</width>
+    <height>537</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWidget</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../sources/resource.qrc">
+    <normaloff>:/icons/storage.ico</normaloff>:/icons/storage.ico</iconset>
   </property>
   <widget class="QTableWidget" name="tableWidget">
    <property name="geometry">
@@ -163,6 +167,30 @@
      <width>113</width>
      <height>20</height>
     </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>510</y>
+     <width>421</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+     <italic>false</italic>
+     <bold>true</bold>
+     <underline>false</underline>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 0, 0);</string>
+   </property>
+   <property name="text">
+    <string>提示：双击表中数据即选中商品编号，后续操作就是针对该商品的操作</string>
    </property>
   </widget>
  </widget>

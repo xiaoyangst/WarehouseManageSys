@@ -6,6 +6,7 @@
 #define WAREHOUSEMANAGESYS__MAINWIDGET_H_
 
 #include <QWidget>
+#include <QTableWidgetItem>
 #include "SqlConnect.h"
 
 QT_BEGIN_NAMESPACE
@@ -23,6 +24,7 @@ class MainWidget : public QWidget {
   void initSql();
   void initConnectFunc();
   void initTableWidget();
+  void showAllDataToTable();
  private slots:
   static void addGoods();
   void removeGoods();
@@ -31,9 +33,10 @@ class MainWidget : public QWidget {
   void exportData();
   void summaryData();
   void searchData();
+  void updateId(int row, int column);
  private:
   Ui::MainWidget *ui;
-
+  QString m_id;
   SqlConnect* m_db;
 };
 

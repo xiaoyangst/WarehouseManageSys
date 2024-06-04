@@ -17,7 +17,7 @@ AddGoods::AddGoods(QWidget *parent) :
   initWindow();
 
   connect(ui->addBtn,&QPushButton::clicked, this,&AddGoods::addGoods);
-
+  connect(ui->clearBtn,&QPushButton::clicked, this,&AddGoods::clearData);
 }
 
 
@@ -58,5 +58,15 @@ void AddGoods::addGoods() {
     QMessageBox::information(this,"提示","插入失败");
   }
 
+
+}
+void AddGoods::clearData() {
+  ui->goodsIdEdit->clear();
+  ui->goodsNameEdit->clear();
+  ui->goodsCountEdit->clear();
+  ui->goodsPriceEdit->clear();
+  ui->supplierEdit->clear();
+  ui->directorEdit->clear();
+  ui->remarkTextEdit->clear();
 }
 

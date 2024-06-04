@@ -48,8 +48,12 @@
    <property name="text">
     <string>增加商品</string>
    </property>
+   <property name="icon">
+    <iconset resource="../sources/resource.qrc">
+     <normaloff>:/icons/add.ico</normaloff>:/icons/add.ico</iconset>
+   </property>
   </widget>
-  <widget class="QPushButton" name="closeBtn">
+  <widget class="QPushButton" name="clearBtn">
    <property name="geometry">
     <rect>
      <x>440</x>
@@ -59,7 +63,11 @@
     </rect>
    </property>
    <property name="text">
-    <string>退出操作</string>
+    <string>清空数据</string>
+   </property>
+   <property name="icon">
+    <iconset resource="../sources/resource.qrc">
+     <normaloff>:/icons/exit.ico</normaloff>:/icons/exit.ico</iconset>
    </property>
   </widget>
   <widget class="QLineEdit" name="goodsPriceEdit">
@@ -201,6 +209,8 @@
    </property>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="../sources/resource.qrc"/>
+ </resources>
  <connections/>
 </ui>

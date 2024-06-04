@@ -21,6 +21,7 @@ class AddGoods : public QWidget {
   void initWindow();
  private slots:
   void addGoods();
+ void clearData();
  private:
   Ui::AddGoods *ui;
 };
