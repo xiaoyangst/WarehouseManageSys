@@ -19,16 +19,16 @@ bool SqlConnect::connectDb(const QString &user, const QString &pwd, const QStrin
 
   return m_db.open();
 }
-void SqlConnect::addGoods() {
+void SqlConnect::addGoodsSql(const QString& query) {
 
 }
-void SqlConnect::removeGoods() {
+void SqlConnect::removeGoodsSql(const QString& query) {
 
 }
-void SqlConnect::modifyGoods() {
+void SqlConnect::modifyGoodsSql(const QString& query) {
 
 }
-void SqlConnect::findGoods() {
+void SqlConnect::findGoodsSql(const QString& query) {
 
 }
 

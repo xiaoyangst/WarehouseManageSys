@@ -21,6 +21,16 @@ class MainWidget : public QWidget {
  private:
   void initWindow();
   void initSql();
+  void initConnectFunc();
+  void initTableWidget();
+ private slots:
+  static void addGoods();
+  void removeGoods();
+  void uploadWareHouse();
+  void downloadWareHouse();
+  void exportData();
+  void summaryData();
+  void searchData();
  private:
   Ui::MainWidget *ui;
 

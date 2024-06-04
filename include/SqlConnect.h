@@ -16,15 +16,16 @@ class SqlConnect : public QWidget{
   // 连接数据库
   bool connectDb(const QString& user, const QString& pwd, const QString& host, const QString& db, int port = 3306);
   //增加商品信息
-  void addGoods();
+  void addGoodsSql(const QString& query);
   //删除商品信息
-  void removeGoods();
+  void removeGoodsSql(const QString& query);
   //修改商品信息
-  void modifyGoods();
+  void modifyGoodsSql(const QString& query);
   //查询商品信息
-  void findGoods();
+  void findGoodsSql(const QString& query);
  private:
   QSqlDatabase m_db;
+  QSqlQuery m_query;
 };
 
 #endif //WAREHOUSEMANAGESYS__SQLCONNECT_H_
