@@ -193,6 +193,23 @@
     <string>提示：双击表中数据即选中商品编号，后续操作就是针对该商品的操作</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="showAllBtn">
+   <property name="geometry">
+    <rect>
+     <x>650</x>
+     <y>70</y>
+     <width>75</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>显示数据</string>
+   </property>
+   <property name="icon">
+    <iconset resource="../sources/resource.qrc">
+     <normaloff>:/icons/show.ico</normaloff>:/icons/show.ico</iconset>
+   </property>
+  </widget>
  </widget>
  <resources>
   <include location="../sources/resource.qrc"/>

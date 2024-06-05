@@ -41,7 +41,7 @@ void AddGoods::addGoods() {
   QString goods_price = ui->goodsPriceEdit->text();
   QString supplier = ui->supplierEdit->text();
   QString director = ui->directorEdit->text();
-  QString time = QDateTime::currentDateTime().toString("yy-MM-dd HH:mm:ss");
+  QString time = QDateTime::currentDateTime().toString("yyyy-MM-dd HH:mm:ss");
   QString warehousetime = time;
   QString deliverytime =  time;
   QString remark = ui->remarkTextEdit->toPlainText();
@@ -58,7 +58,7 @@ void AddGoods::addGoods() {
     QMessageBox::information(this,"提示","插入失败");
   }
 
-
+  emit goodsAdd();
 }
 void AddGoods::clearData() {
   ui->goodsIdEdit->clear();

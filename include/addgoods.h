@@ -17,6 +17,8 @@ class AddGoods : public QWidget {
  public:
   explicit AddGoods(QWidget *parent = nullptr);
   ~AddGoods() override;
+  signals:
+  void goodsAdd();
  private:
   void initWindow();
  private slots:

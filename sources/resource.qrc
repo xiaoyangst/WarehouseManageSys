@@ -9,5 +9,8 @@
         <file>icons/upload.ico</file>
         <file>icons/storage.ico</file>
         <file>icons/exit.ico</file>
+        <file>icons/show.ico</file>
+        <file>icons/clear.ico</file>
+        <file>qss/style.qss</file>
     </qresource>
 </RCC>
