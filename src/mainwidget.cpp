@@ -7,7 +7,8 @@
 #include "ui_uploadwarehouse.h"
 #include "exportwarehouse.h"
 #include "ui_exportwarehouse.h"
-
+#include "exportwarehouse.h"
+#include "ui_exportwarehouse.h"
 
 
 MainWidget::MainWidget(QWidget *parent) :
@@ -47,11 +48,12 @@ void MainWidget::initConnectFunc() {
   connect(ui->addGoodsBtn,&QPushButton::clicked, this,&MainWidget::addGoods);
   connect(ui->removeGoodsBtn,&QPushButton::clicked, this,&MainWidget::removeGoods);
   connect(ui->uploadWareHouseBtn,&QPushButton::clicked, this,&MainWidget::uploadWareHouse);
-  connect(ui->exportDataBtn,&QPushButton::clicked, this,&MainWidget::downloadWareHouse);
+  connect(ui->exportWareHouseBtn,&QPushButton::clicked, this,&MainWidget::exportWareHouse);
   connect(ui->exportDataBtn,&QPushButton::clicked, this,&MainWidget::exportData);
   connect(ui->summeryDataBtn,&QPushButton::clicked, this,&MainWidget::summaryData);
   connect(ui->searchDataBtn,&QPushButton::clicked, this,&MainWidget::searchData);
   connect(ui->tableWidget,&QTableWidget::cellDoubleClicked, this,&MainWidget::updateId);
+  connect(ui->showAllBtn,&QPushButton::clicked,this,&MainWidget::showAllDataToTable);
 }
 
 void MainWidget::initTableWidget() {
@@ -90,6 +92,7 @@ void MainWidget::initTableWidget() {
 void MainWidget::addGoods() {
   auto *add_goods = new AddGoods();
   add_goods->show();
+  connect(add_goods,&AddGoods::goodsAdd,this,&MainWidget::showAllDataToTable);
 }
 void MainWidget::removeGoods() {
 
@@ -98,14 +101,16 @@ void MainWidget::uploadWareHouse() {
   // 拿到id，传递给 UploadWareHouse对象
   if (m_id.compare("NULL")){
     auto *upload_ware_house = new UploadWareHouse(m_id);
+    connect(upload_ware_house,&UploadWareHouse::warehouseUpdated, this,&MainWidget::showSingleDataToTable);
     upload_ware_house->show();
   }else{
     QMessageBox::information(this, "提示", "没有选中任何商品，请选择之后再使用入库功能");
   }
 }
-void MainWidget::downloadWareHouse() {
+void MainWidget::exportWareHouse() {
   if (m_id.compare("NULL")){
     auto *export_ware_house = new ExportWareHouse(m_id);
+    connect(export_ware_house,&ExportWareHouse::warehouseExported, this,&MainWidget::showSingleDataToTable);
     export_ware_house->show();
   }else{
     QMessageBox::information(this, "提示", "没有选中任何商品，请选择之后再使用出库功能");
@@ -119,13 +124,19 @@ void MainWidget::summaryData() {
 }
 
 void MainWidget::searchData() {
-  ui->tableWidget->clearContents();   // 只清除表中数据，不清除表头内容
-
-  QSqlQuery sql_query;
-
   // 执行sql命令-从数据库中获取数据-在表格中展示数据
   QString id_ = ui->searchEdit->text();
-  QString query_ = QString("select * from goodsinfo where goods_id = %1").arg(id_);
+  showSingleDataToTable(id_);
+}
+void MainWidget::updateId(int row, int column) {
+  // 通过行和列来绝对确定商品的编号，而非除编号以外的其它数据
+  m_id = ui->tableWidget->item(row,0)->data(0).toString();
+}
+void MainWidget::showAllDataToTable() {
+  ui->tableWidget->clearContents();
+
+  QSqlQuery sql_query;
+  QString query_ = QString("select * from goodsinfo");
   sql_query.exec(query_);
 
   int row_ = 0;
@@ -152,15 +163,13 @@ void MainWidget::searchData() {
 
     row_++;
   }
+}
+void MainWidget::showSingleDataToTable(const QString& id) {
+  ui->tableWidget->clearContents();   // 只清除表中数据，不清除表头内容
 
-}
-void MainWidget::updateId(int row, int column) {
-  // 通过行和列来绝对确定商品的编号，而非除编号以外的其它数据
-  m_id = ui->tableWidget->item(row,0)->data(0).toString();
-}
-void MainWidget::showAllDataToTable() {
   QSqlQuery sql_query;
-  QString query_ = QString("select * from goodsinfo");
+
+  QString query_ = QString("select * from goodsinfo where goods_id = %1").arg(id);
   sql_query.exec(query_);
 
   int row_ = 0;

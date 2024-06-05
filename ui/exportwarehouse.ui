@@ -1,22 +1,117 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
-    <author/>
-    <comment/>
-    <exportmacro/>
-    <class>ExportWareHouse</class>
-    <widget class="QWidget" name="ExportWareHouse">
-        <property name="geometry">
-            <rect>
-                <x>0</x>
-                <y>0</y>
-                <width>400</width>
-                <height>300</height>
-            </rect>
-        </property>
-        <property name="windowTitle">
-            <string>ExportWareHouse</string>
-        </property>
-    </widget>
-    <pixmapfunction/>
-    <connections/>
+ <class>ExportWareHouse</class>
+ <widget class="QWidget" name="ExportWareHouse">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>482</width>
+    <height>207</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>ExportWareHouse</string>
+  </property>
+  <widget class="QPushButton" name="exportBtn">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>160</y>
+     <width>75</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>商品出库</string>
+   </property>
+   <property name="icon">
+    <iconset resource="../sources/resource.qrc">
+     <normaloff>:/icons/download.ico</normaloff>:/icons/download.ico</iconset>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="clearBtn">
+   <property name="geometry">
+    <rect>
+     <x>360</x>
+     <y>160</y>
+     <width>75</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>清空数据</string>
+   </property>
+   <property name="icon">
+    <iconset resource="../sources/resource.qrc">
+     <normaloff>:/icons/clear.ico</normaloff>:/icons/clear.ico</iconset>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>20</y>
+     <width>411</width>
+     <height>111</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string/>
+   </property>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>54</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>商品编号：</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Countlabel">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>30</y>
+      <width>54</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>未选中</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>30</y>
+      <width>54</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>商品数量：</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="CountEdit">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>30</y>
+      <width>113</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources>
+  <include location="../sources/resource.qrc"/>
+ </resources>
+ <connections/>
 </ui>

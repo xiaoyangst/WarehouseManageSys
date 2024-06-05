@@ -67,7 +67,7 @@
    </property>
    <property name="icon">
     <iconset resource="../sources/resource.qrc">
-     <normaloff>:/icons/exit.ico</normaloff>:/icons/exit.ico</iconset>
+     <normaloff>:/icons/clear.ico</normaloff>:/icons/clear.ico</iconset>
    </property>
   </widget>
   <widget class="QLineEdit" name="goodsPriceEdit">

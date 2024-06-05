@@ -18,7 +18,14 @@ class ExportWareHouse : public QWidget {
   explicit ExportWareHouse(QWidget *parent = nullptr);
   explicit ExportWareHouse(QString id,QWidget *parent = nullptr);
   ~ExportWareHouse() override;
-
+  signals:
+  void warehouseExported(const QString &id);
+ private:
+  void initWindow();
+  void showGoodsId();
+ private slots:
+  void exportWareHouse();
+  void clearData();
  private:
   Ui::ExportWareHouse *ui;
 

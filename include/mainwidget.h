@@ -24,12 +24,13 @@ class MainWidget : public QWidget {
   void initSql();
   void initConnectFunc();
   void initTableWidget();
+  void showSingleDataToTable(const QString& id);
   void showAllDataToTable();
  private slots:
-  static void addGoods();
+  void addGoods();
   void removeGoods();
   void uploadWareHouse();
-  void downloadWareHouse();
+  void exportWareHouse();
   void exportData();
   void summaryData();
   void searchData();

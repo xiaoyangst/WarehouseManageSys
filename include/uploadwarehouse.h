@@ -5,6 +5,7 @@
 #include <QWidget>
 #include <QSqlQuery>
 #include <QMessageBox>
+#include "mainwidget.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class UploadWareHouse; }
@@ -17,12 +18,14 @@ class UploadWareHouse : public QWidget {
   explicit UploadWareHouse(QWidget *parent = nullptr);
   explicit UploadWareHouse(QString id,QWidget *parent = nullptr);
   ~UploadWareHouse() override;
+ signals:
+  void warehouseUpdated(const QString &id);
  private:
   void initWindow();
   void showGoodsId();
  private slots:
   void uploadWareHouse();
-  void closeWindow();
+  void clearData();
  private:
   Ui::UploadWareHouse *ui;
   QString m_id;
