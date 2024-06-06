@@ -1,6 +1,3 @@
-//
-// Created by xy on 2024-06-02.
-//
 
 #ifndef WAREHOUSEMANAGESYS__MAINWIDGET_H_
 #define WAREHOUSEMANAGESYS__MAINWIDGET_H_
@@ -26,6 +23,8 @@ class MainWidget : public QWidget {
   void initTableWidget();
   void showSingleDataToTable(const QString& id);
   void showAllDataToTable();
+  void removeSingleGoods();
+  void exportToExcel();
  private slots:
   void addGoods();
   void removeGoods();
@@ -39,6 +38,7 @@ class MainWidget : public QWidget {
   Ui::MainWidget *ui;
   QString m_id;
   SqlConnect* m_db;
+  QSqlQuery m_sql_query;
 };
 
 #endif //WAREHOUSEMANAGESYS__MAINWIDGET_H_

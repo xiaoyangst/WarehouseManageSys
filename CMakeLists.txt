@@ -14,9 +14,12 @@ find_package(Qt6 COMPONENTS
         Sql
         REQUIRED)
 
+
 #搜索头文件
 include_directories(include/)
 file(GLOB HEADER_FILES "include/*.h")
+
+
 
 #搜索源文件
 file(GLOB SRC_LIST "src/*.cpp")
@@ -28,6 +31,7 @@ file(GLOB UI_FILES "ui/*.ui")
 file(GLOB_RECURSE RESOURCES "sources/*.qrc")
 
 add_subdirectory(src)
+add_subdirectory(thirdpart/OpenXLSX)
 
 #调用预编译器moc，需要使用 QT5_WRAP_CPP宏
 QT6_WRAP_CPP(HEADERS_MOC ${HEADER_FILES})
@@ -36,6 +40,8 @@ QT6_WRAP_UI(FORMS_HEADERS ${UI_FILES})
 #处理资源得到.qrc文件
 QT6_ADD_RESOURCES(RCC ${RESOURCES})
 
+
+
 add_executable(WarehouseManageSys main.cpp ${HEADERS_MOC} ${SRC_LIST} ${FORMS_HEADERS} ${RCC})
 
 target_link_libraries(WarehouseManageSys
@@ -43,4 +49,5 @@ target_link_libraries(WarehouseManageSys
         Qt6::Gui
         Qt6::Widgets
         Qt6::Sql
+        OpenXLSX::OpenXLSX
 )
