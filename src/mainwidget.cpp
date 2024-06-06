@@ -7,8 +7,8 @@
 #include "ui_uploadwarehouse.h"
 #include "exportwarehouse.h"
 #include "ui_exportwarehouse.h"
-#include "exportwarehouse.h"
-#include "ui_exportwarehouse.h"
+#include "OpenXLSX.hpp"
+using namespace OpenXLSX;
 
 
 MainWidget::MainWidget(QWidget *parent) :
@@ -95,7 +95,14 @@ void MainWidget::addGoods() {
   connect(add_goods,&AddGoods::goodsAdd,this,&MainWidget::showAllDataToTable);
 }
 void MainWidget::removeGoods() {
-
+  if (m_id.compare("NULL")){
+    QMessageBox::StandardButton reply = QMessageBox::warning(this,"警告","确定要删除指定的商品？删除后不可恢复！！！",QMessageBox::Yes | QMessageBox::No);
+    if (reply == QMessageBox::Yes){
+      removeSingleGoods();
+    }
+  }else{
+    QMessageBox::information(this, "提示", "没有选中任何商品，请选择之后再使用删除商品功能");
+  }
 }
 void MainWidget::uploadWareHouse() {
   // 拿到id，传递给 UploadWareHouse对象
@@ -117,7 +124,7 @@ void MainWidget::exportWareHouse() {
   }
 }
 void MainWidget::exportData() {
-
+  exportToExcel();
 }
 void MainWidget::summaryData() {
 
@@ -135,21 +142,20 @@ void MainWidget::updateId(int row, int column) {
 void MainWidget::showAllDataToTable() {
   ui->tableWidget->clearContents();
 
-  QSqlQuery sql_query;
   QString query_ = QString("select * from goodsinfo");
-  sql_query.exec(query_);
+  m_sql_query.exec(query_);
 
   int row_ = 0;
-  while (sql_query.next()){
-    QString goods_id = sql_query.value(0).toString();
-    QString goods_name = sql_query.value(1).toString();
-    QString goods_amount = sql_query.value(2).toString();
-    QString goods_price = sql_query.value(3).toString();
-    QString supplier = sql_query.value(4).toString();
-    QString director = sql_query.value(5).toString();
-    QString warehousetime = sql_query.value(6).toString();
-    QString deliverytime = sql_query.value(7).toString();
-    QString remark = sql_query.value(8).toString();
+  while (m_sql_query.next()){
+    QString goods_id = m_sql_query.value(0).toString();
+    QString goods_name = m_sql_query.value(1).toString();
+    QString goods_amount = m_sql_query.value(2).toString();
+    QString goods_price = m_sql_query.value(3).toString();
+    QString supplier = m_sql_query.value(4).toString();
+    QString director = m_sql_query.value(5).toString();
+    QString warehousetime = m_sql_query.value(6).toString();
+    QString deliverytime = m_sql_query.value(7).toString();
+    QString remark = m_sql_query.value(8).toString();
 
     ui->tableWidget->setItem(row_,0,new QTableWidgetItem(goods_id));
     ui->tableWidget->setItem(row_,1,new QTableWidgetItem(goods_name));
@@ -167,22 +173,20 @@ void MainWidget::showAllDataToTable() {
 void MainWidget::showSingleDataToTable(const QString& id) {
   ui->tableWidget->clearContents();   // 只清除表中数据，不清除表头内容
 
-  QSqlQuery sql_query;
-
   QString query_ = QString("select * from goodsinfo where goods_id = %1").arg(id);
-  sql_query.exec(query_);
+  m_sql_query.exec(query_);
 
   int row_ = 0;
-  while (sql_query.next()){
-    QString goods_id = sql_query.value(0).toString();
-    QString goods_name = sql_query.value(1).toString();
-    QString goods_amount = sql_query.value(2).toString();
-    QString goods_price = sql_query.value(3).toString();
-    QString supplier = sql_query.value(4).toString();
-    QString director = sql_query.value(5).toString();
-    QString warehousetime = sql_query.value(6).toString();
-    QString deliverytime = sql_query.value(7).toString();
-    QString remark = sql_query.value(8).toString();
+  while (m_sql_query.next()){
+    QString goods_id = m_sql_query.value(0).toString();
+    QString goods_name = m_sql_query.value(1).toString();
+    QString goods_amount = m_sql_query.value(2).toString();
+    QString goods_price = m_sql_query.value(3).toString();
+    QString supplier = m_sql_query.value(4).toString();
+    QString director = m_sql_query.value(5).toString();
+    QString warehousetime = m_sql_query.value(6).toString();
+    QString deliverytime = m_sql_query.value(7).toString();
+    QString remark = m_sql_query.value(8).toString();
 
     ui->tableWidget->setItem(row_,0,new QTableWidgetItem(goods_id));
     ui->tableWidget->setItem(row_,1,new QTableWidgetItem(goods_name));
@@ -196,4 +200,75 @@ void MainWidget::showSingleDataToTable(const QString& id) {
 
     row_++;
   }
+}
+void MainWidget::removeSingleGoods() {
+    QString sql = QString("delete from goodsinfo where goods_id = %1").arg(m_id);
+    if(!m_sql_query.exec(sql)){
+      QMessageBox::information(this, "提示", "删除指定商品失败！！！");
+    }
+    showAllDataToTable();
+}
+#include <QFileDialog>
+void MainWidget::exportToExcel() {
+  // 确定保存的文件绝对路径
+  QString selectedPath = QFileDialog::getExistingDirectory(this, "Select Directory", "/home");
+  if (selectedPath.isEmpty()) {
+    QMessageBox::information(this, "提示", "No path selected.");
+    return;
+  }
+
+  // 设置命名
+  QString curTime = QDateTime::currentDateTime().toString("yyyy-MM-dd-hhmmss");
+
+  // 合并路径+文件名
+  QString filename = selectedPath + "/" + curTime + ".xlsx";
+
+  // 创建execl文件
+  XLDocument excelFile;
+  excelFile.create(filename.toStdString());
+  auto workspace = excelFile.workbook().worksheet("Sheet1");
+
+  //  设置表头
+  workspace.cell("A1").value() = "编号";
+  workspace.cell("B1").value() = "名称";
+  workspace.cell("C1").value() = "数量";
+  workspace.cell("D1").value() = "单价";
+  workspace.cell("E1").value() = "供应商家";
+  workspace.cell("F1").value() = "负责人";
+  workspace.cell("G1").value() = "入库时间";
+  workspace.cell("H1").value() = "出库时间";
+  workspace.cell("I1").value() = "备注";
+
+  // 把数据写入到execl文件中
+  QString query_ = QString("select * from goodsinfo");
+  m_sql_query.exec(query_);
+
+  int row_ = 2;
+  while (m_sql_query.next()){
+    QString goods_id = m_sql_query.value(0).toString();
+    QString goods_name = m_sql_query.value(1).toString();
+    QString goods_amount = m_sql_query.value(2).toString();
+    QString goods_price = m_sql_query.value(3).toString();
+    QString supplier = m_sql_query.value(4).toString();
+    QString director = m_sql_query.value(5).toString();
+    QString warehousetime = m_sql_query.value(6).toString();
+    QString deliverytime = m_sql_query.value(7).toString();
+    QString remark = m_sql_query.value(8).toString();
+
+//    qDebug()<<"A"+QString::number(row_).toStdString();
+    workspace.cell("A"+QString::number(row_).toStdString()).value() = goods_id.toStdString();
+    workspace.cell("B"+QString::number(row_).toStdString()).value() = goods_name.toStdString();
+    workspace.cell("C"+QString::number(row_).toStdString()).value() = goods_amount.toStdString();
+    workspace.cell("D"+QString::number(row_).toStdString()).value() = goods_price.toStdString();
+    workspace.cell("E"+QString::number(row_).toStdString()).value() = supplier.toStdString();
+    workspace.cell("F"+QString::number(row_).toStdString()).value() = director.toStdString();
+    workspace.cell("G"+QString::number(row_).toStdString()).value() = warehousetime.toStdString();
+    workspace.cell("H"+QString::number(row_).toStdString()).value() = deliverytime.toStdString();
+    workspace.cell("I"+QString::number(row_).toStdString()).value() = remark.toStdString();
+
+    row_++;
+  }
+
+  excelFile.save();
+  excelFile.close();
 }
