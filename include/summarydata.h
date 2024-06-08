@@ -19,6 +19,7 @@ class SummaryData : public QWidget {
   ~SummaryData() override;
 
  private:
+
   void initWindow();
   void initPriceWindow();
   void initInWindow();
@@ -33,6 +34,7 @@ class SummaryData : public QWidget {
  void summaryOut();
  void saveData();
  private:
+
   Ui::SummaryData *ui;
 };
 

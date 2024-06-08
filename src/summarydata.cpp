@@ -1,3 +1,4 @@
+
 #include <QSqlQuery>
 #include "summarydata.h"
 #include "ui_SummaryData.h"
@@ -10,9 +11,11 @@ QString execl_data[] = {
     "A","B","C","D","E","F","G","H","I","J","K"
 };
 
+
 SummaryData::SummaryData(QWidget *parent) :
     QWidget(parent), ui(new Ui::SummaryData) {
   ui->setupUi(this);
+
 
   initWindow();
   summaryPrice();
@@ -22,11 +25,13 @@ SummaryData::SummaryData(QWidget *parent) :
   connect(ui->outBtn,&QPushButton::clicked,this,&SummaryData::summaryOut);
   connect(ui->saveBtn,&QPushButton::clicked,this,&SummaryData::saveData);
 
+
 }
 
 SummaryData::~SummaryData() {
   delete ui;
 }
+
 void SummaryData::initWindow() {
   setWindowTitle("数据汇总");
   setFixedSize(this->width(), this->height());
@@ -297,3 +302,4 @@ void SummaryData::showOutToTable() {
     row_++;
   }
 }
+

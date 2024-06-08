@@ -213,6 +213,8 @@ void MainWidget::removeSingleGoods() {
     showAllDataToTable();
 }
 
+
+
 void MainWidget::exportToExcel() {
   // 确定保存的文件绝对路径
   QString selectedPath = QFileDialog::getExistingDirectory(this, "Select Directory", "/home");

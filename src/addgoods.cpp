@@ -52,6 +52,7 @@ void AddGoods::addGoods() {
     QMessageBox::information(this,"提示","插入失败！！！");
   }
 
+
   // 同时初始化 其它表中该商品的记录
 
   sql = QString("insert into  goodsininfo (goods_id,in_count) values('%1','%2')").arg(goods_id,goods_amount);
@@ -69,6 +70,7 @@ void AddGoods::addGoods() {
   if (!sql_query.exec(sql)){
     QMessageBox::information(this,"提示","插入总价汇总表失败！！！");
   }
+
 
   emit goodsAdd();
 }

@@ -43,6 +43,7 @@ void ExportWareHouse::clearData() {
 void ExportWareHouse::exportWareHouse() {
   //先获取表中该商品已有数量
   QSqlQuery sql_query;
+
   QString id_ = m_id;
   QString query_ = QString("select goods_amount,goods_price from goodsinfo where goods_id = %1").arg(id_);
   if(!sql_query.exec(query_)){
@@ -55,6 +56,7 @@ void ExportWareHouse::exportWareHouse() {
   if (sql_query.next()) {
     int num = sql_query.value(0).toInt() - ui->CountEdit->text().toInt();
     new_total_price = num * sql_query.value(1).toInt();
+
     if (num < 0) {
       QMessageBox::information(this, "提示", "出库数量超过已有库存！！！");
       clearData();
@@ -77,6 +79,7 @@ void ExportWareHouse::exportWareHouse() {
     QMessageBox::information(this, "提示", "更新出库时间失败");
   }
 
+
   // 出库数量记录到goodsoutinfo表中
   query_ = QString("select out_count from goodsoutinfo where goods_id = %1").arg(id_);
   if (!sql_query.exec(query_)) {
@@ -98,6 +101,7 @@ void ExportWareHouse::exportWareHouse() {
   if (!sql_query.exec(query_)) {
     QMessageBox::information(this, "提示", "更新总价记录失败！！！");
   }
+
 
 
   emit warehouseExported(id_);

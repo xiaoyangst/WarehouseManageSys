@@ -35,6 +35,7 @@ void UploadWareHouse::uploadWareHouse() {
   QSqlQuery sql_query;
 
   QString id_ = m_id;
+
   QString query_ = QString("select goods_amount,goods_price from goodsinfo where goods_id = %1").arg(id_);
   sql_query.exec(query_);
 
@@ -43,6 +44,7 @@ void UploadWareHouse::uploadWareHouse() {
   if (sql_query.next()) {
     int num = ui->countEdit->text().toInt() + sql_query.value(0).toInt();   // 入库数量最新数据
     new_total_price = num * sql_query.value(1).toInt();                     // 最新总价
+
     QString numStr = QString::number(num);    // int  --》  QString
     query_ = QString("update goodsinfo set goods_amount = %1 where goods_id = %2").arg(numStr, id_);
     if (sql_query.exec(query_)) {
@@ -80,7 +82,6 @@ void UploadWareHouse::uploadWareHouse() {
   if (!sql_query.exec(query_)) {
     QMessageBox::information(this, "提示", "更新总价记录失败！！！");
   }
-
 
   emit warehouseUpdated(id_);
 }
