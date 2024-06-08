@@ -19,6 +19,20 @@ class SummaryData : public QWidget {
   ~SummaryData() override;
 
  private:
+  void initWindow();
+  void initPriceWindow();
+  void initInWindow();
+  void initOutWindow();
+
+  void showPriceToTable();
+  void showInToTable();
+  void showOutToTable();
+ private slots:
+  void summaryPrice();
+ void summaryIn();
+ void summaryOut();
+ void saveData();
+ private:
   Ui::SummaryData *ui;
 };
 

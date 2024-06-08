@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>896</width>
-    <height>537</height>
+    <width>1168</width>
+    <height>625</height>
    </rect>
   </property>
   <property name="font">
@@ -27,15 +27,15 @@
     <rect>
      <x>20</x>
      <y>120</y>
-     <width>851</width>
-     <height>371</height>
+     <width>1131</width>
+     <height>451</height>
     </rect>
    </property>
   </widget>
   <widget class="QPushButton" name="addGoodsBtn">
    <property name="geometry">
     <rect>
-     <x>30</x>
+     <x>210</x>
      <y>70</y>
      <width>75</width>
      <height>24</height>
@@ -52,7 +52,7 @@
   <widget class="QPushButton" name="removeGoodsBtn">
    <property name="geometry">
     <rect>
-     <x>130</x>
+     <x>310</x>
      <y>70</y>
      <width>75</width>
      <height>24</height>
@@ -69,7 +69,7 @@
   <widget class="QPushButton" name="uploadWareHouseBtn">
    <property name="geometry">
     <rect>
-     <x>240</x>
+     <x>420</x>
      <y>70</y>
      <width>75</width>
      <height>24</height>
@@ -86,7 +86,7 @@
   <widget class="QPushButton" name="exportWareHouseBtn">
    <property name="geometry">
     <rect>
-     <x>350</x>
+     <x>530</x>
      <y>70</y>
      <width>75</width>
      <height>24</height>
@@ -103,7 +103,7 @@
   <widget class="QPushButton" name="exportDataBtn">
    <property name="geometry">
     <rect>
-     <x>450</x>
+     <x>630</x>
      <y>70</y>
      <width>75</width>
      <height>24</height>
@@ -120,7 +120,7 @@
   <widget class="QPushButton" name="summeryDataBtn">
    <property name="geometry">
     <rect>
-     <x>550</x>
+     <x>730</x>
      <y>70</y>
      <width>75</width>
      <height>24</height>
@@ -137,7 +137,7 @@
   <widget class="QPushButton" name="searchDataBtn">
    <property name="geometry">
     <rect>
-     <x>780</x>
+     <x>1060</x>
      <y>20</y>
      <width>75</width>
      <height>24</height>
@@ -154,7 +154,7 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>530</x>
+     <x>810</x>
      <y>20</y>
      <width>101</width>
      <height>21</height>
@@ -172,7 +172,7 @@
   <widget class="QLineEdit" name="searchEdit">
    <property name="geometry">
     <rect>
-     <x>650</x>
+     <x>930</x>
      <y>20</y>
      <width>113</width>
      <height>20</height>
@@ -183,7 +183,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>510</y>
+     <y>590</y>
      <width>421</width>
      <height>21</height>
     </rect>
@@ -206,7 +206,7 @@
   <widget class="QPushButton" name="showAllBtn">
    <property name="geometry">
     <rect>
-     <x>650</x>
+     <x>830</x>
      <y>70</y>
      <width>75</width>
      <height>24</height>

@@ -1,9 +1,3 @@
-//
-// Created by xy on 2024-06-04.
-//
-
-// You may need to build the project (run Qt uic code generator) to get "ui_AddGoods.h" resolved
-
 #include "addgoods.h"
 #include "ui_AddGoods.h"
 #include <QDateTime>
@@ -53,9 +47,27 @@ void AddGoods::addGoods() {
 
   QSqlQuery sql_query;
   if(sql_query.exec(sql)){
-    QMessageBox::information(this,"提示","插入成功");
+    QMessageBox::information(this,"提示","插入成功！！！");
   }else{
-    QMessageBox::information(this,"提示","插入失败");
+    QMessageBox::information(this,"提示","插入失败！！！");
+  }
+
+  // 同时初始化 其它表中该商品的记录
+
+  sql = QString("insert into  goodsininfo (goods_id,in_count) values('%1','%2')").arg(goods_id,goods_amount);
+  if (!sql_query.exec(sql)){
+    QMessageBox::information(this,"提示","插入入库汇总表失败！！！");
+  }
+
+  sql = QString("insert into  goodsoutinfo (goods_id,out_count) values('%1','%2')").arg(goods_id,QString::number(0));
+  if (!sql_query.exec(sql)){
+    QMessageBox::information(this,"提示","插入出库汇总表失败！！！");
+  }
+
+  QString priceCount = QString::number(goods_amount.toInt() * goods_price.toInt());
+  sql = QString("insert into  totalprice (goods_id,total_price) values('%1','%2')").arg(goods_id,priceCount);
+  if (!sql_query.exec(sql)){
+    QMessageBox::information(this,"提示","插入总价汇总表失败！！！");
   }
 
   emit goodsAdd();

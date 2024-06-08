@@ -7,7 +7,10 @@
 #include "ui_uploadwarehouse.h"
 #include "exportwarehouse.h"
 #include "ui_exportwarehouse.h"
+#include "summarydata.h"
+#include "ui_summarydata.h"
 #include "OpenXLSX.hpp"
+#include <QFileDialog>
 using namespace OpenXLSX;
 
 
@@ -127,7 +130,8 @@ void MainWidget::exportData() {
   exportToExcel();
 }
 void MainWidget::summaryData() {
-
+  auto *summary_data = new SummaryData();
+  summary_data->show();
 }
 
 void MainWidget::searchData() {
@@ -208,12 +212,12 @@ void MainWidget::removeSingleGoods() {
     }
     showAllDataToTable();
 }
-#include <QFileDialog>
+
 void MainWidget::exportToExcel() {
   // 确定保存的文件绝对路径
   QString selectedPath = QFileDialog::getExistingDirectory(this, "Select Directory", "/home");
   if (selectedPath.isEmpty()) {
-    QMessageBox::information(this, "提示", "No path selected.");
+    QMessageBox::information(this, "提示", "没有选中合适的路径！！！");
     return;
   }
 
@@ -255,7 +259,6 @@ void MainWidget::exportToExcel() {
     QString deliverytime = m_sql_query.value(7).toString();
     QString remark = m_sql_query.value(8).toString();
 
-//    qDebug()<<"A"+QString::number(row_).toStdString();
     workspace.cell("A"+QString::number(row_).toStdString()).value() = goods_id.toStdString();
     workspace.cell("B"+QString::number(row_).toStdString()).value() = goods_name.toStdString();
     workspace.cell("C"+QString::number(row_).toStdString()).value() = goods_amount.toStdString();
