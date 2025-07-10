@@ -12,5 +12,5 @@ void MainWidget::initSql() {
 }
 ```
 
-Clion开发整个项目，Cmkae管理整个项目（Qt Creator同样支持，到时候导入编译即可）
+Clion开发整个项目，CMake管理整个项目（Qt Creator同样支持，到时候导入编译即可）
 
